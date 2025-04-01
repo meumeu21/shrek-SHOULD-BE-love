@@ -7,6 +7,8 @@ public class EnemyHealth : MonoBehaviour
     private int currentHealth;
     [SerializeField] private Slider healthSlider; // Ссылка на UI Slider
 
+    [SerializeField] private Animator animator;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -19,6 +21,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        animator.SetTrigger("IsHit");
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
         UpdateHealthUI();
@@ -27,7 +30,11 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        animator.SetTrigger("IsDead");
+        CallAfterDelay.Create(3f, () =>
+        {
+            Destroy(gameObject);
+        });
     }
 
     private void UpdateHealthUI()

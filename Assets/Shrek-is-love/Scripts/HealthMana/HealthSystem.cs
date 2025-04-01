@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class HealthSystem : MonoBehaviour
@@ -21,6 +23,8 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private UIManipulation uiManipulation;
 
     private static HealthSystem _instance;
+
+    [SerializeField] private Animator animator;
 
     public static HealthSystem Instance
     {
@@ -53,7 +57,7 @@ public class HealthSystem : MonoBehaviour
     }
 
     void Start()
-    {   
+    {
         currentHealth = maxHealth;
         if (healthSlider != null) 
         {
@@ -71,10 +75,15 @@ public class HealthSystem : MonoBehaviour
         currentHealth = Mathf.Max(currentHealth, 0);
         UpdateHealthUI();
         Debug.Log("Damage taken! Current health: " + currentHealth);
+        animator.SetTrigger("IsHit");
 
         if (currentHealth == 0)
         {
-            Die();
+            animator.SetTrigger("IsDead");
+            CallAfterDelay.Create(2f, () =>
+            {
+                Die();
+            });
         }
     }
 
@@ -148,4 +157,5 @@ public class HealthSystem : MonoBehaviour
             Debug.Log("Health upgrade! New health: " + currentHealth);
         }
     }
+
 }

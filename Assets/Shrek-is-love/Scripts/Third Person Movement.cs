@@ -117,8 +117,11 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             canMove = false;
             animator.SetTrigger("Attack");
+            CallAfterDelay.Create(0.5f, () =>
+            {
+                DealDamageToEnemies(physAttackPoints, "Attack");
+            });
             
-            DealDamageToEnemies(physAttackPoints, "Attack");
         }
 
         if (Input.GetMouseButtonDown(1) && !IsAnimationPlaying("Yelling") && !IsAnimationPlaying("Attacking") && isGrounded)
