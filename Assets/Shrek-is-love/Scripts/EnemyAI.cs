@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -201,7 +198,7 @@ public class EnemyAI : MonoBehaviour
     void LookingPlayer(Vector3 player)
     {
         navMeshAgent.SetDestination(player);
-        if (Vector3.Distance(transform.position, player) <= 0.3) 
+        if (Vector3.Distance(transform.position, player) <= 0.8) 
         {
             if(m_WaitTime <= 0)
             {
