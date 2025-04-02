@@ -17,7 +17,7 @@ MonoBehaviour:
   speedWalk: 6
   speedRun: 9
   stoppingDistance: 0.5
-  attackWaitTime: 0.2
+  attackWaitTime: 3
   viewRadius: 15
   viewAngle: 360
   playerMask:
