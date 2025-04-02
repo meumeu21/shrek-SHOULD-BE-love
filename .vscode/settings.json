@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Shrek-is-love.sln"
+    "dotnet.defaultSolution": "shrek-SHOULD-BE-love.sln"
 }
