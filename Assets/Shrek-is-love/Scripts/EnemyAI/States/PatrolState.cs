@@ -12,7 +12,6 @@ public class PatrolState
 
     private int currentWaypointIndex;
     private float waitTime;
-    private float timeToRotate;
 
     public PatrolState(EnemyStateMachine stateMachine, NavMeshAgent agent, Animator animator, EnemySettings settings)
     {
@@ -26,7 +25,6 @@ public class PatrolState
     public void Enter()
     {
         waitTime = settings.startWaitTime;
-        timeToRotate = settings.timeToRotate;
         agent.isStopped = false;
         agent.speed = settings.speedWalk;
         agent.SetDestination(waypoints[currentWaypointIndex].position);
@@ -41,7 +39,7 @@ public class PatrolState
             if (!agent.isStopped)
             {
                 agent.isStopped = true;
-                waitTime = settings.startWaitTime; 
+                waitTime = settings.startWaitTime;
             }
 
             if (waitTime > 0)

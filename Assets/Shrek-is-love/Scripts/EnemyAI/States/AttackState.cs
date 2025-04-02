@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,7 +10,8 @@ public class AttackState
     private readonly DamageDealer damageDealer;
     private readonly MagicSpell magicSpell;
 
-    private float waitTime;
+    private float attackCooldown;
+    private bool isAttacking;
 
     public AttackState(EnemyStateMachine stateMachine, NavMeshAgent agent, Animator animator, EnemySettings settings)
     {
@@ -28,25 +26,55 @@ public class AttackState
     public void Enter()
     {
         agent.isStopped = true;
-        animator.SetTrigger("Attack");
-        if (stateMachine.currentEnemy.CompareTag("BasicEnemy")) {
-            CallAfterDelay.Create(0.3f, () =>
-            {
-                damageDealer?.Attack();
-            });
-        }
-        if (stateMachine.currentEnemy.CompareTag("MagicEnemy"))
-        {
-            magicSpell.Enter();
-        }
-        waitTime = settings.attackWaitTime;
+        attackCooldown = settings.attackWaitTime;
+        isAttacking = false;
+        TryAttack();
     }
+
     public void Update()
     {
-        waitTime -= Time.deltaTime;
-        if (waitTime <= 0)
+        Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        stateMachine.transform.LookAt(new Vector3(playerPos.x, stateMachine.transform.position.y, playerPos.z));
+
+        float distance = Vector3.Distance(stateMachine.transform.position, playerPos);
+
+        if (distance > settings.attackRange * 1.2f)
         {
             stateMachine.SetState(EnemyState.Chase);
+            return;
+        }
+
+        if (attackCooldown > 0)
+        {
+            attackCooldown -= Time.deltaTime;
+        }
+        else if (!isAttacking)
+        {
+            TryAttack();
+        }
+    }
+
+    private void TryAttack()
+    {
+        if (animator.GetBool("IsHit") || animator.GetBool("IsDead"))
+            return;
+
+        isAttacking = true;
+        attackCooldown = settings.attackWaitTime;
+        animator.SetTrigger("Attack");
+
+        if (stateMachine.currentEnemy.CompareTag("BasicEnemy"))
+        {
+            CallAfterDelay.Create(0.55f, () =>
+            {
+                damageDealer?.Attack();
+                isAttacking = false;
+            });
+        }
+        else if (stateMachine.currentEnemy.CompareTag("MagicEnemy"))
+        {
+            magicSpell.Enter();
+            isAttacking = false;
         }
     }
 }

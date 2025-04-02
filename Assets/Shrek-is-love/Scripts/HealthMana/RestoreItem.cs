@@ -12,7 +12,9 @@ public class RestoreItem : MonoBehaviour
             HealthSystem healthSystem = other.GetComponent<HealthSystem>();
             if (healthSystem != null)
             {
+                FindObjectOfType<AudioManager>().Play("Potion");
                 healthSystem.Heal(restoreAmount);
+                Destroy(gameObject);
             }
         }
         else
@@ -20,7 +22,9 @@ public class RestoreItem : MonoBehaviour
             ManaSystem manaSystem = other.GetComponent<ManaSystem>();
             if (manaSystem != null)
             {
+                FindObjectOfType<AudioManager>().Play("Potion");
                 manaSystem.RestoreMana(restoreAmount);
+                Destroy(gameObject);
             }
         }
     }

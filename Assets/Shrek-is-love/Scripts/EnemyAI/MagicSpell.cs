@@ -24,16 +24,15 @@ public class MagicSpell : MonoBehaviour
             Vector3 SpawnLocation = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
             spawnedSpell = Instantiate(spell, SpawnLocation, Quaternion.identity);
             isSpawned = true;
+            FindObjectOfType<AudioManager>().Play("Magic");
         }
     }
     void Update()
     {
-        Debug.Log(existingTime);
 
         if (existingTime > 0 && isSpawned)
         {
             existingTime -= Time.deltaTime;
-
             damageDealer = spawnedSpell.GetComponent<DamageDealer>();
             Vector3 playerPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
             spawnedSpell.transform.LookAt(playerPosition);

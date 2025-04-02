@@ -39,14 +39,15 @@ public class ChaseState
         {
             float distanceToPlayer = Vector3.Distance(stateMachine.transform.position, player.position);
 
+            agent.SetDestination(player.position);
+            agent.isStopped = false;
+
             if (distanceToPlayer <= settings.attackRange)
             {
                 caughtPlayer = true;
                 stateMachine.SetState(EnemyState.Attack);
                 return;
             }
-
-            agent.SetDestination(player.position);
 
             if (agent.remainingDistance <= agent.stoppingDistance)
             {

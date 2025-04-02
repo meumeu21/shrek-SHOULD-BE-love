@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +12,11 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
+    private EnemyStateMachine stateMachine;
+
     void Start()
     {
+        stateMachine = GetComponent<EnemyStateMachine>();
         currentHealth = maxHealth;
         if (healthSlider != null)
         {
@@ -26,6 +32,7 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = Mathf.Max(currentHealth, 0);
         UpdateHealthUI();
         if (currentHealth <= 0) Die();
+        else stateMachine.SetState(EnemyState.Chase);
     }
 
     private void Die()

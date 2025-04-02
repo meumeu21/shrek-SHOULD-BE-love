@@ -15,7 +15,7 @@ public class EnemyVision : MonoBehaviour
             if (Vector3.Angle(transform.forward, dirToPlayer) < settings.viewAngle / 2)
             {
                 float distance = Vector3.Distance(transform.position, player.transform.position);
-                if (!Physics.Raycast(transform.position, dirToPlayer, distance, settings.obstacleMask))
+                if (!Physics.SphereCast(transform.position, settings.sphereCastRadius, dirToPlayer, out _, distance, settings.obstacleMask))
                 {
                     playerPosition = player.transform.position;
                     return true;
@@ -23,11 +23,5 @@ public class EnemyVision : MonoBehaviour
             }
         }
         return false;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, settings.viewRadius);
     }
 }
