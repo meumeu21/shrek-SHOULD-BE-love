@@ -143,7 +143,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void DealDamageToEnemies(int damage, string attackType)
     {
-        float attackRadius = (attackType == "Attack") ? 5f : 10f; 
+        float attackRadius = (attackType == "Attack") ? physAttackRadius : yellAttackRadius; 
         LayerMask enemyLayer = LayerMask.GetMask("Enemy"); 
 
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRadius, enemyLayer);

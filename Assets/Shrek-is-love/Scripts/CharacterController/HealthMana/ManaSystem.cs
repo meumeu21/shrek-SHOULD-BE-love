@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ManaSystem : MonoBehaviour 
+public class ManaSystem : MonoBehaviour, IDataPersistence, IManaSystem
 {
     [SerializeField] private int maxMana = 15;
     private int currentMana;
@@ -19,6 +19,7 @@ public class ManaSystem : MonoBehaviour
     private float baseWidth;
 
     private static ManaSystem _instance;
+
 
     public static ManaSystem Instance
     {
@@ -142,5 +143,15 @@ public class ManaSystem : MonoBehaviour
             UpdateManaUI();
             Debug.Log("Mana upgrade! New mana: " + currentMana);
         }
+    }
+
+    public void LoadData(GameData gameData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        throw new System.NotImplementedException();
     }
 }
