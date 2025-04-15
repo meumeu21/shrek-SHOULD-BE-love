@@ -13,7 +13,7 @@ public class LevelUp : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Potion");
         UpgradeHealth();
         UpgradeMana();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     void UpgradeHealth()

@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthSystem : MonoBehaviour
+public class HealthSystem : MonoBehaviour, IDataPersistence
 {
-    [SerializeField] private int maxHealth = 20;
+    [SerializeField] private int maxHealth;
     private int currentHealth;
 
     [SerializeField] private Slider healthSlider; // Ссылка на UI Slider
@@ -56,14 +56,12 @@ public class HealthSystem : MonoBehaviour
 
     void Start()
     {
-        currentHealth = maxHealth;
         if (healthSlider != null) 
         {
             healthSlider.maxValue = maxHealth;
             healthBarRect = healthSlider.GetComponent<RectTransform>();
             baseWidth = healthBarRect.sizeDelta.x;
         }
-        Debug.Log("Health initialized: " + currentHealth);
         UpdateHealthUI();
     }
 
@@ -104,6 +102,7 @@ public class HealthSystem : MonoBehaviour
 
     private void UpdateHealthUI()
     {
+        
         if (healthSlider != null)
         {
             healthSlider.value = currentHealth;
@@ -156,4 +155,15 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
+    public void LoadData(GameData gameData)
+    {
+        this.currentHealth = gameData.PlayerHP;
+        this.maxHealth = gameData.PlayerMaxHP;
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        gameData.PlayerHP = this.currentHealth;
+        gameData.PlayerMaxHP = this.maxHealth;
+    }
 }

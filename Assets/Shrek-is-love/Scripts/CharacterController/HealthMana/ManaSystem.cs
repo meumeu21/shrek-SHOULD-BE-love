@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class ManaSystem : MonoBehaviour, IDataPersistence, IManaSystem
 {
-    [SerializeField] private int maxMana = 15;
+    [SerializeField] private int maxMana;
     private int currentMana;
 
     [SerializeField] private Slider manaSlider; // Ссылка на UI Slider
@@ -54,10 +54,8 @@ public class ManaSystem : MonoBehaviour, IDataPersistence, IManaSystem
     void Start()
     {
         manaSlider.maxValue = maxMana;
-        currentMana = maxMana;
         manaBarRect = manaSlider.GetComponent<RectTransform>();
         baseWidth = manaBarRect.sizeDelta.x;
-        Debug.Log("Mana initialized: " + currentMana);
         UpdateManaUI();
     }
 
@@ -147,11 +145,13 @@ public class ManaSystem : MonoBehaviour, IDataPersistence, IManaSystem
 
     public void LoadData(GameData gameData)
     {
-        throw new System.NotImplementedException();
+        this.maxMana = gameData.PlayerMaxMana;
+        this.currentMana = gameData.PlayerMana;
     }
 
     public void SaveData(ref GameData gameData)
     {
-        throw new System.NotImplementedException();
+        gameData.PlayerMaxMana = this.maxMana;
+        gameData.PlayerMana = this.currentMana;
     }
 }

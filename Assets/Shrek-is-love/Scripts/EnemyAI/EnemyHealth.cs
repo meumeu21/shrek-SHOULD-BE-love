@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 30;
-    private int currentHealth;
+    public int currentHealth;
     [SerializeField] private Slider healthSlider; // Ссылка на UI Slider
 
     [SerializeField] private Animator animator;
@@ -40,7 +40,7 @@ public class EnemyHealth : MonoBehaviour
         animator.SetTrigger("IsDead");
         CallAfterDelay.Create(3f, () =>
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         });
     }
 

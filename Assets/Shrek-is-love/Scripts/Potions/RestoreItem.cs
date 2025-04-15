@@ -14,7 +14,6 @@ public class RestoreItem : MonoBehaviour
             {
                 FindObjectOfType<AudioManager>().Play("Potion");
                 healthSystem.Heal(restoreAmount);
-                Destroy(gameObject);
             }
         }
         else
@@ -24,8 +23,8 @@ public class RestoreItem : MonoBehaviour
             {
                 FindObjectOfType<AudioManager>().Play("Potion");
                 manaSystem.RestoreMana(restoreAmount);
-                Destroy(gameObject);
             }
         }
+        gameObject.SetActive(false);
     }
 }

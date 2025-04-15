@@ -28,6 +28,7 @@ public class PatrolState
         agent.isStopped = false;
         agent.speed = settings.speedWalk;
         agent.SetDestination(waypoints[currentWaypointIndex].position);
+        
     }
 
     public void Update()

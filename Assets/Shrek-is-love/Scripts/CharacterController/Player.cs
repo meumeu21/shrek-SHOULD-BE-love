@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDataPersistence
 {
     private PlayerMovement _movement;
     private PlayerJump _jump;
@@ -29,6 +29,16 @@ public class Player : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void LoadData(GameData gameData)
+    {
+        this.transform.position = gameData.PlayerPosition;
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        gameData.PlayerPosition = this.transform.position;
     }
 
 }
