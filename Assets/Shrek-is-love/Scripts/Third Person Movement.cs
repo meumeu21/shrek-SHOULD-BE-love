@@ -27,7 +27,9 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] private bool canMove = true;
 
     [SerializeField] private int physAttackPoints = 5;
+    [SerializeField] private float physAttackRadius = 5f;
     [SerializeField] private int yellAttackPoints = 2;
+    [SerializeField] private float yellAttackRadius = 10f;
     [SerializeField] private int manaPoints = 5;
 
     void Start()
@@ -111,29 +113,51 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void Attack()
     {
-        // Обычная атака
-        if (Input.GetMouseButtonDown(0) && !IsAnimationPlaying("Attacking") && !IsAnimationPlaying("Yelling") && isGrounded) // Анимация запускается только при нажатии
+        if (Input.GetMouseButtonDown(0) && !IsAnimationPlaying("Attacking") && !IsAnimationPlaying("Yelling") && isGrounded)
         {
             canMove = false;
-            animator.SetTrigger("Attack"); // Используем триггер для анимации атаки
+            animator.SetTrigger("Attack");
+            CallAfterDelay.Create(0.5f, () =>
+            {
+                DealDamageToEnemies(physAttackPoints, "Attack");
+            });
+            
         }
 
-        // Атака "yelling"
-        if (Input.GetMouseButtonDown(1) && !IsAnimationPlaying("Yelling") && !IsAnimationPlaying("Attacking") && isGrounded) // Анимация запускается только при нажатии
+        if (Input.GetMouseButtonDown(1) && !IsAnimationPlaying("Yelling") && !IsAnimationPlaying("Attacking") && isGrounded)
         {
             canMove = false;
             ManaSystem manaSystem = GetComponent<ManaSystem>();
             if (manaSystem != null && manaSystem.GetCurrentMana() > 0)
             {
-                if (manaSystem.UseSufficientMana(manaPoints)) {
-                    animator.SetTrigger("Yell"); // Используем триггер для анимации "yelling"
+                if (manaSystem.UseSufficientMana(manaPoints))
+                {
+                    animator.SetTrigger("Yell");
                     FindObjectOfType<AudioManager>().Play("Scream");
+                    
+                    DealDamageToEnemies(yellAttackPoints, "Yell");
                 }
             }
-        } 
+        }
     }
 
+    private void DealDamageToEnemies(int damage, string attackType)
+    {
+        float attackRadius = (attackType == "Attack") ? 5f : 10f; 
+        LayerMask enemyLayer = LayerMask.GetMask("Enemy"); 
 
+        Collider[] hitEnemies = Physics.OverlapSphere(transform.position, attackRadius, enemyLayer);
+        
+        foreach (Collider enemy in hitEnemies)
+        {
+            EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(damage);
+                Debug.Log($"Нанесено {damage} урона врагу {enemy.name} (тип атаки: {attackType})");
+            }
+        }
+    }
 
     // Переменная, вызывающаяся в аниматоре
     // Не используется

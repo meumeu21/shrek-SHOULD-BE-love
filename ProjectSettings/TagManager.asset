@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Points
+  - Enemy
+  - MagicEnemy
+  - BasicEnemy
+  - LevelUp
   layers:
   - Default
   - TransparentFX
@@ -12,9 +17,9 @@ TagManager:
   - Enviroment
   - Water
   - UI
-  - Ground
-  - 
-  - 
+  - Player
+  - Obstacles
+  - Enemy
   - 
   - 
   - 
