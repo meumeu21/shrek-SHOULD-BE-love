@@ -7,10 +7,6 @@ public class PauseMenuManager : MonoBehaviour
 {
     [SerializeField] private UIManipulation UIManipulation;
 
-    public void Start()
-    {
-        Cursor.lockState = CursorLockMode.Confined;
-    }
     public void SaveGame()
     {
         DataPersistenceManager.instance.SaveGame();
@@ -22,11 +18,6 @@ public class PauseMenuManager : MonoBehaviour
         UIManipulation.RestartSequence();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         DataPersistenceManager.instance.LoadGame();
-    }
-    public void BackToGame()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        UIManipulation.RestartSequence();
     }
 
     public void ExitToMainMenu()

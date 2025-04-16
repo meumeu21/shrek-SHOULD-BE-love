@@ -8,10 +8,6 @@ public class UIManipulation : MonoBehaviour
 
     private bool isPaused;
 
-    private void Start()
-    {
-        FindObjectOfType<AudioManager>().Play("MainTheme");
-    }
     private void Update()
     {
         if(Input.GetKeyUp(KeyCode.Escape))
@@ -20,10 +16,12 @@ public class UIManipulation : MonoBehaviour
             {
                 isPaused = false;
                 RestartSequence();
+                Cursor.lockState = CursorLockMode.Locked;
             }
             else
             {
                 isPaused = true;
+                Cursor.lockState = CursorLockMode.Confined;
                 PauseMenu.SetActive(true);
                 Time.timeScale = 0f;
             }

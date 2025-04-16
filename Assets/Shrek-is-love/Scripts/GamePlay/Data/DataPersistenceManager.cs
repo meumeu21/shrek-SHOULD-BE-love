@@ -14,9 +14,14 @@ public class DataPersistenceManager : MonoBehaviour
 
     private List<IDataPersistence> dataPersistenceObjects;
 
-    private FileDataHandler fileDataHandler;
+    private IDataRepository dataRepository;
 
     public static DataPersistenceManager instance { get; private set; }
+
+    public void Initialize(IDataRepository repository)
+    {
+        this.dataRepository = repository;
+    }
 
     private void Awake()
     {
@@ -30,7 +35,7 @@ public class DataPersistenceManager : MonoBehaviour
         instance = this; 
         DontDestroyOnLoad(this.gameObject);
 
-        this.fileDataHandler = new FileDataHandler(Application.persistentDataPath, FileName);
+        Initialize(new FileDataHandler(Application.persistentDataPath, FileName));
     }
 
     private void OnEnable() 
@@ -63,7 +68,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void LoadGame()
     {
-        this.gameData = fileDataHandler.Load();
+        this.gameData = dataRepository.Load();
 
         if (this.gameData == null)
         {
@@ -75,10 +80,6 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObj.LoadData(gameData);
         }
-        Debug.Log("Loaded HP = " + gameData.PlayerHP);
-        Debug.Log("Loaded Mana = " + gameData.PlayerMana);
-        Debug.Log("Loaded MaxHP = " + gameData.PlayerMaxHP);
-        Debug.Log("Loaded MaxMana = " + gameData.PlayerMaxMana);
     }
 
     public void SaveGame()
@@ -93,12 +94,8 @@ public class DataPersistenceManager : MonoBehaviour
             dataPersistenceObj.SaveData(ref gameData);
         }
 
-        Debug.Log("Saved HP = " + gameData.PlayerHP);
-        Debug.Log("Saved Mana = " + gameData.PlayerMana);
-        Debug.Log("Saved MaxHP = " + gameData.PlayerMaxHP);
-        Debug.Log("Saved MaxMana = " + gameData.PlayerMaxMana);
 
-        fileDataHandler.Save(gameData);
+        dataRepository.Save(gameData);
     }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()
@@ -111,7 +108,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void ResetGame() 
     {
         this.gameData = new GameData();
-        fileDataHandler.Save(gameData);
+        dataRepository.Save(gameData);
         Debug.Log("IS THAT THE GRIM REAPER");
     } 
 

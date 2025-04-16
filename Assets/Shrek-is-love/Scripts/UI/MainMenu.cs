@@ -11,9 +11,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject settingsMenu;
     private void Start()
     {
-        FindObjectOfType<AudioManager>().Play("MenuTheme");
         Cursor.lockState = CursorLockMode.Confined;
-        if(DataPersistenceManager.instance.HasGameData())
+        if(!DataPersistenceManager.instance.HasGameData())
         {
             loadButton.interactable = false;
         }
@@ -27,8 +26,8 @@ public class MainMenu : MonoBehaviour
 
     public void OnLoadButtonClicked()
     {
+        DataPersistenceManager.instance.LoadGame();
         SceneManager.LoadSceneAsync("Level1");
-        Debug.Log("LoadGame");
     }
 
     public void OnSettingsButtonClicked()
