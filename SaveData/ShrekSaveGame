@@ -1,0 +1,11 @@
+{
+    "PlayerMaxHP": 20,
+    "PlayerHP": 20,
+    "PlayerMaxMana": 15,
+    "PlayerMana": 15,
+    "PlayerPosition": {
+        "x": -19.719999313354493,
+        "y": 2.6532461643218996,
+        "z": -21.299999237060548
+    }
+}
