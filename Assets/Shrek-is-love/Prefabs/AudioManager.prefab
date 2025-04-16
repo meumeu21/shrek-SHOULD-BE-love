@@ -50,16 +50,19 @@ MonoBehaviour:
     volume: 0.596
     pitch: 1
     loop: 0
+    mixer: {fileID: 24300002, guid: fdc9aa15539afce4683adfdc6d680438, type: 2}
     source: {fileID: 0}
   - name: MainTheme
     clip: {fileID: 8300000, guid: ef14e3c9505b4f24faca03b48f981dab, type: 3}
     volume: 0.246
     pitch: 1
     loop: 1
+    mixer: {fileID: 24300002, guid: fdc9aa15539afce4683adfdc6d680438, type: 2}
     source: {fileID: 0}
   - name: MenuTheme
     clip: {fileID: 8300000, guid: 63337a82c57372b459ca0723a9304dbf, type: 3}
     volume: 0.246
     pitch: 1
     loop: 1
+    mixer: {fileID: 24300002, guid: fdc9aa15539afce4683adfdc6d680438, type: 2}
     source: {fileID: 0}
