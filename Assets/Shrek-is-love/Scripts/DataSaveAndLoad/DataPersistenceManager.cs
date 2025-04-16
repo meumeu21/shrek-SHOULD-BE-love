@@ -22,10 +22,13 @@ public class DataPersistenceManager : MonoBehaviour
     {
         if(instance != null)
         {
-            Debug.LogError("More that one DataManager on the scene");
+            Debug.LogError("More that one DataManager on the scene. The newest one was destroyed.");
+            Destroy(this.gameObject);
+            return;
         }
 
         instance = this; 
+        DontDestroyOnLoad(this.gameObject);
 
         this.fileDataHandler = new FileDataHandler(Application.persistentDataPath, FileName);
     }
@@ -53,13 +56,6 @@ public class DataPersistenceManager : MonoBehaviour
         SaveGame();
     }
 
-    private void Start()
-    {
-        // this.fileDataHandler = new FileDataHandler(Application.persistentDataPath, FileName);
-        // this.dataPersistenceObjects = FindAllDataPersistenceObjects();
-        // LoadGame();
-    }
-
     public void NewGame()
     {
         this.gameData = new GameData();
@@ -71,8 +67,8 @@ public class DataPersistenceManager : MonoBehaviour
 
         if (this.gameData == null)
         {
-            Debug.Log("No game is saved. Starting a new one.");
-            NewGame();
+            Debug.LogWarning("No game is saved. A new game needs tobe started.");
+            return;
         }
 
         foreach(IDataPersistence dataPersistenceObj in dataPersistenceObjects)
@@ -87,6 +83,11 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void SaveGame()
     {
+        if (this.gameData == null)
+        {
+            Debug.LogWarning("No data to save.");
+            return;
+        }
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
         {
             dataPersistenceObj.SaveData(ref gameData);
@@ -98,11 +99,6 @@ public class DataPersistenceManager : MonoBehaviour
         Debug.Log("Saved MaxMana = " + gameData.PlayerMaxMana);
 
         fileDataHandler.Save(gameData);
-    }
-
-    private void OnApplicationQuit()
-    {
-        SaveGame();
     }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()
@@ -119,4 +115,8 @@ public class DataPersistenceManager : MonoBehaviour
         Debug.Log("IS THAT THE GRIM REAPER");
     } 
 
+    public bool HasGameData()
+    {
+        return gameData != null;
+    }
 }

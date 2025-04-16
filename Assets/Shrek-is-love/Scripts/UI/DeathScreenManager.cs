@@ -5,6 +5,12 @@ public class DeathScreenManager : MonoBehaviour
 {
     [SerializeField] private UIManipulation UIManipulation;
 
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
     public void Restart()
     {
         UIManipulation.RestartSequence();

@@ -38,6 +38,7 @@ public class EnemyAI : MonoBehaviour, IDataPersistence
         {
             this.transform.position = enemyData.enemyPosition;
             health.currentHealth = enemyData.enemyHealth;
+            health.isDead = enemyData.isDead;
             health.UpdateHealthUI();
             Debug.Log("Loaded statistics for " + id + " : position: " + gameData.EnemyStatistics[id].enemyPosition + " health: " + gameData.EnemyStatistics[id].enemyHealth);
         }
@@ -45,7 +46,7 @@ public class EnemyAI : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData gameData)
     {
-        gameData.EnemyStatistics[id] =  new EnemyData(this.transform.position, health.currentHealth);
+        gameData.EnemyStatistics[id] =  new EnemyData(this.transform.position, health.currentHealth, health.isDead);
         Debug.Log("Saved statistics for " + id + " : position: " + gameData.EnemyStatistics[id].enemyPosition + " health: " + gameData.EnemyStatistics[id].enemyHealth);
     }
 }

@@ -8,14 +8,16 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 30;
     public int currentHealth;
-    [SerializeField] private Slider healthSlider; // Ссылка на UI Slider
+    public Slider healthSlider; // Ссылка на UI Slider
 
     [SerializeField] private Animator animator;
 
     private EnemyStateMachine stateMachine;
+    public bool isDead = false;
 
     void Start()
     {
+        if(isDead) { gameObject.SetActive(false); return; }
         stateMachine = GetComponent<EnemyStateMachine>();
         currentHealth = maxHealth;
         if (healthSlider != null)
@@ -24,6 +26,7 @@ public class EnemyHealth : MonoBehaviour
         }
         UpdateHealthUI();
     }
+
 
     public void TakeDamage(int damage)
     {
@@ -42,6 +45,7 @@ public class EnemyHealth : MonoBehaviour
         {
             gameObject.SetActive(false);
         });
+        isDead = true;
     }
 
     public void UpdateHealthUI()
