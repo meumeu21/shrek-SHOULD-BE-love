@@ -32,7 +32,7 @@ public class FileDataHandler
                     }
                 }
 
-                loadedData = JsonUtility.FromJson<GameData>(dataToLoad); // из json обратно в объект GameData
+                loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
             }
             catch
             {
@@ -44,7 +44,7 @@ public class FileDataHandler
 
     public void Save(GameData data)
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName); // для разных систем могут быть разные пути
+        string fullPath = Path.Combine(dataDirPath, dataFileName);
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));

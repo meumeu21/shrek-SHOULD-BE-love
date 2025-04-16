@@ -38,6 +38,7 @@ public class EnemyAI : MonoBehaviour, IDataPersistence
         {
             this.transform.position = enemyData.enemyPosition;
             health.currentHealth = enemyData.enemyHealth;
+            health.UpdateHealthUI();
             Debug.Log("Loaded statistics for " + id + " : position: " + gameData.EnemyStatistics[id].enemyPosition + " health: " + gameData.EnemyStatistics[id].enemyHealth);
         }
     }

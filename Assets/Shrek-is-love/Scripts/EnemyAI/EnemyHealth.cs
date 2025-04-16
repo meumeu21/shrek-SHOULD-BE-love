@@ -44,7 +44,7 @@ public class EnemyHealth : MonoBehaviour
         });
     }
 
-    private void UpdateHealthUI()
+    public void UpdateHealthUI()
     {
         if (healthSlider != null)
         {

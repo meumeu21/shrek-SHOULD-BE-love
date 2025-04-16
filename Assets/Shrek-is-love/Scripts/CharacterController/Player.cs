@@ -11,16 +11,13 @@ public class Player : MonoBehaviour, IDataPersistence
     private ManaSystem _manaSystem;
     private void Awake()
     {
-        // Получаем зависимости
         _manaSystem = GetComponent<ManaSystem>();
         _animationController = GetComponent<PlayerAnimationController>();
 
-        // Инициализируем модули
         _movement = GetComponent<PlayerMovement>();
         _jump = GetComponent<PlayerJump>();
         _combat = GetComponent<PlayerCombat>();
 
-        // Передаём зависимости
         _movement.Initialize(_animationController);
         _combat.Initialize(_manaSystem, _animationController);
         _jump.Initialize(_animationController);

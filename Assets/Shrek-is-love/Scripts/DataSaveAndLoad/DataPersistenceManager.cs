@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.SceneManagement;
 
 public class DataPersistenceManager : MonoBehaviour
 {
@@ -15,24 +16,48 @@ public class DataPersistenceManager : MonoBehaviour
 
     private FileDataHandler fileDataHandler;
 
-    public static DataPersistenceManager instance { get; private set; } // полкчать публично, изменять приватно
+    public static DataPersistenceManager instance { get; private set; }
 
     private void Awake()
     {
-        // должен быть только 1 менеджер
         if(instance != null)
         {
             Debug.LogError("More that one DataManager on the scene");
         }
 
         instance = this; 
+
+        this.fileDataHandler = new FileDataHandler(Application.persistentDataPath, FileName);
+    }
+
+    private void OnEnable() 
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private void OnDisable() 
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
+    {
+        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+        LoadGame();
+    }
+
+    public void OnSceneUnloaded(Scene scene) 
+    {
+        SaveGame();
     }
 
     private void Start()
     {
-        this.fileDataHandler = new FileDataHandler("C:/Users/Marley/Documents/UnityProjects/shrek-SHOULD-BE-love/Assets/Shrek-is-love/Scripts/DataSaveAndLoad/SaveData", FileName); // Application.persistentDataPath - даст стандартную директорию для сохранения
-        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
-        LoadGame();
+        // this.fileDataHandler = new FileDataHandler(Application.persistentDataPath, FileName);
+        // this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+        // LoadGame();
     }
 
     public void NewGame()
@@ -86,5 +111,12 @@ public class DataPersistenceManager : MonoBehaviour
 
         return new List<IDataPersistence>(dataPersistenceObjects);
     }
+
+    public void ResetGame() 
+    {
+        this.gameData = new GameData();
+        fileDataHandler.Save(gameData);
+        Debug.Log("IS THAT THE GRIM REAPER");
+    } 
 
 }

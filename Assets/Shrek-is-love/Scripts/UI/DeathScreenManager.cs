@@ -1,15 +1,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RestartLevel : MonoBehaviour
+public class DeathScreenManager : MonoBehaviour
 {
     [SerializeField] private UIManipulation UIManipulation;
 
-    // Метод для перезапуска уровня
     public void Restart()
     {
         UIManipulation.RestartSequence();
-        // Получить имя текущей сцены и перезагрузить её
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        DataPersistenceManager.instance.ResetGame();
+    }
+
+    public void ExitToMainMenu()
+    {
+        DataPersistenceManager.instance.ResetGame();
+        SceneManager.LoadSceneAsync("MainMenu");
     }
 }

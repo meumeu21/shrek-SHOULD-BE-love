@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IDataPersistence
 {
-   void LoadData(GameData gameData); // только чтение данных
+   void LoadData(GameData gameData);
 
-   void SaveData(ref GameData gameData); // референс позволяет изменять данные
+   void SaveData(ref GameData gameData);
 }

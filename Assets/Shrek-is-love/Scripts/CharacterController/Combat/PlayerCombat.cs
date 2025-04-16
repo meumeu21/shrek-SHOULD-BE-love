@@ -70,7 +70,7 @@ public class PlayerCombat : MonoBehaviour
             if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage(damage);
-                Debug.Log($"Нанесено {damage} урона врагу {enemy.name} (тип атаки: {attackType})");
+                Debug.Log($"РРіСЂРѕРє РЅР°РЅРµСЃ {damage} РІСЂР°РіСѓ {enemy.name} (РўРёРї Р°С‚Р°РєРё: {attackType})");
             }
         }
     }

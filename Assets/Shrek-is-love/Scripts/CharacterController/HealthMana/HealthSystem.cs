@@ -61,6 +61,7 @@ public class HealthSystem : MonoBehaviour, IDataPersistence
             healthSlider.maxValue = maxHealth;
             healthBarRect = healthSlider.GetComponent<RectTransform>();
             baseWidth = healthBarRect.sizeDelta.x;
+            healthBarRect.sizeDelta = new Vector2(baseWidth, healthBarRect.sizeDelta.y);
         }
         UpdateHealthUI();
     }
@@ -149,6 +150,7 @@ public class HealthSystem : MonoBehaviour, IDataPersistence
 
             float newWidth = baseWidth * widthMultiplier;
             healthBarRect.sizeDelta = new Vector2(newWidth, healthBarRect.sizeDelta.y);
+            baseWidth = newWidth;
 
             UpdateHealthUI();
             Debug.Log("Health upgrade! New health: " + currentHealth);
@@ -159,11 +161,16 @@ public class HealthSystem : MonoBehaviour, IDataPersistence
     {
         this.currentHealth = gameData.PlayerHP;
         this.maxHealth = gameData.PlayerMaxHP;
+        this.baseWidth = gameData.PlayerHPBarWidth;
+        this.healthBarRect = healthSlider.GetComponent<RectTransform>();
+        this.healthBarRect.sizeDelta = new Vector2(baseWidth, healthBarRect.sizeDelta.y);
+        UpdateHealthUI();
     }
 
     public void SaveData(ref GameData gameData)
     {
         gameData.PlayerHP = this.currentHealth;
         gameData.PlayerMaxHP = this.maxHealth;
+        gameData.PlayerHPBarWidth = this.baseWidth;
     }
 }

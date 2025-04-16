@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -56,6 +57,7 @@ public class ManaSystem : MonoBehaviour, IDataPersistence, IManaSystem
         manaSlider.maxValue = maxMana;
         manaBarRect = manaSlider.GetComponent<RectTransform>();
         baseWidth = manaBarRect.sizeDelta.x;
+        manaBarRect.sizeDelta = new Vector2(baseWidth, manaBarRect.sizeDelta.y);
         UpdateManaUI();
     }
 
@@ -137,6 +139,7 @@ public class ManaSystem : MonoBehaviour, IDataPersistence, IManaSystem
 
             float newWidth = baseWidth * widthMultiplier;
             manaBarRect.sizeDelta = new Vector2(newWidth, manaBarRect.sizeDelta.y);
+            baseWidth = newWidth;
 
             UpdateManaUI();
             Debug.Log("Mana upgrade! New mana: " + currentMana);
@@ -147,11 +150,16 @@ public class ManaSystem : MonoBehaviour, IDataPersistence, IManaSystem
     {
         this.maxMana = gameData.PlayerMaxMana;
         this.currentMana = gameData.PlayerMana;
+        this.baseWidth = gameData.PlayerManaBarWidth;
+        this.manaBarRect = manaSlider.GetComponent<RectTransform>();
+        this.manaBarRect.sizeDelta = new Vector2(baseWidth, manaBarRect.sizeDelta.y);
+        UpdateManaUI();
     }
 
     public void SaveData(ref GameData gameData)
     {
         gameData.PlayerMaxMana = this.maxMana;
         gameData.PlayerMana = this.currentMana;
+        gameData.PlayerManaBarWidth = this.baseWidth;
     }
 }
