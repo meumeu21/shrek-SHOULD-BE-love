@@ -8268,7 +8268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 503064493}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Enemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11722,6 +11722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioManagerPrefab: {fileID: 8193478229607699414, guid: 3d9846932bf81a340a5cca628503a29a, type: 3}
   dataPersistenceManagerPrefab: {fileID: 1114126672054599699, guid: b5a0b516996e04317a98efd186704ce0, type: 3}
+  cursor: {fileID: 3989068671300817759, guid: 1a446ca05a92a6a468f30f2bcf6c2f03, type: 3}
 --- !u!4 &737410466
 Transform:
   m_ObjectHideFlags: 0

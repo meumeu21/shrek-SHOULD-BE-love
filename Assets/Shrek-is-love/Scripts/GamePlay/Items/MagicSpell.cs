@@ -24,7 +24,7 @@ public class MagicSpell : MonoBehaviour
             Vector3 SpawnLocation = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
             spawnedSpell = Instantiate(spell, SpawnLocation, Quaternion.identity);
             isSpawned = true;
-            FindObjectOfType<AudioManager>().Play("Magic");
+            FindObjectOfType<AudioManager>().Play("MagicWhoosh");
         }
     }
     void Update()

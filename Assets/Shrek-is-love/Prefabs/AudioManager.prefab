@@ -45,24 +45,73 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sounds:
-  - name: Scream
-    clip: {fileID: 8300000, guid: 866e5bb89df920248b3ab50680faa37f, type: 3}
-    volume: 0.596
+  - name: MenuTheme
+    clip: {fileID: 8300000, guid: 63337a82c57372b459ca0723a9304dbf, type: 3}
+    volume: 0.106
     pitch: 1
-    loop: 0
-    mixer: {fileID: 24300002, guid: fdc9aa15539afce4683adfdc6d680438, type: 2}
+    loop: 1
+    mixer: {fileID: 24300002, guid: a4cf67e0e2ba60d40aef3419770a7f32, type: 2}
     source: {fileID: 0}
   - name: MainTheme
     clip: {fileID: 8300000, guid: ef14e3c9505b4f24faca03b48f981dab, type: 3}
     volume: 0.246
     pitch: 1
     loop: 1
-    mixer: {fileID: 24300002, guid: fdc9aa15539afce4683adfdc6d680438, type: 2}
+    mixer: {fileID: 24300002, guid: a4cf67e0e2ba60d40aef3419770a7f32, type: 2}
     source: {fileID: 0}
-  - name: MenuTheme
-    clip: {fileID: 8300000, guid: 63337a82c57372b459ca0723a9304dbf, type: 3}
+  - name: Scream
+    clip: {fileID: 8300000, guid: 866e5bb89df920248b3ab50680faa37f, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    mixer: {fileID: -8783311533240127663, guid: a4cf67e0e2ba60d40aef3419770a7f32, type: 2}
+    source: {fileID: 0}
+  - name: MagicWhoosh
+    clip: {fileID: 8300000, guid: 561baa878545fbc40b1e53adb999fede, type: 3}
     volume: 0.246
     pitch: 1
-    loop: 1
-    mixer: {fileID: 24300002, guid: fdc9aa15539afce4683adfdc6d680438, type: 2}
+    loop: 0
+    mixer: {fileID: -8783311533240127663, guid: a4cf67e0e2ba60d40aef3419770a7f32, type: 2}
+    source: {fileID: 0}
+  - name: PotionSound
+    clip: {fileID: 8300000, guid: 25a061ee464593540b6787ad6e4d42e9, type: 3}
+    volume: 0.246
+    pitch: 1
+    loop: 0
+    mixer: {fileID: -8783311533240127663, guid: a4cf67e0e2ba60d40aef3419770a7f32, type: 2}
+    source: {fileID: 0}
+  - name: FairySounds
+    clip: {fileID: 8300000, guid: d0381571bba9b0f409b2565e25723a58, type: 3}
+    volume: 0.246
+    pitch: 1
+    loop: 0
+    mixer: {fileID: -8783311533240127663, guid: a4cf67e0e2ba60d40aef3419770a7f32, type: 2}
+    source: {fileID: 0}
+  - name: Punch
+    clip: {fileID: 8300000, guid: 2616e762ad43ddb4194b10dd880127a0, type: 3}
+    volume: 0.246
+    pitch: 1
+    loop: 0
+    mixer: {fileID: -8783311533240127663, guid: a4cf67e0e2ba60d40aef3419770a7f32, type: 2}
+    source: {fileID: 0}
+  - name: Walking
+    clip: {fileID: 8300000, guid: 25bd3c1f0e8636c48940ecd7d4a0e766, type: 3}
+    volume: 0.246
+    pitch: 1
+    loop: 0
+    mixer: {fileID: -8783311533240127663, guid: a4cf67e0e2ba60d40aef3419770a7f32, type: 2}
+    source: {fileID: 0}
+  - name: Running
+    clip: {fileID: 8300000, guid: 4e6e67947729570438c18cb2e46df4fe, type: 3}
+    volume: 0.246
+    pitch: 1
+    loop: 0
+    mixer: {fileID: -8783311533240127663, guid: a4cf67e0e2ba60d40aef3419770a7f32, type: 2}
+    source: {fileID: 0}
+  - name: Click
+    clip: {fileID: 8300000, guid: fafcb80724f06fc4bac46ae878211f81, type: 3}
+    volume: 0.506
+    pitch: 1
+    loop: 0
+    mixer: {fileID: -8783311533240127663, guid: a4cf67e0e2ba60d40aef3419770a7f32, type: 2}
     source: {fileID: 0}

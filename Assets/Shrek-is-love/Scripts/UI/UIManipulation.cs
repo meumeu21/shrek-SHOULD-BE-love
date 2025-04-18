@@ -12,18 +12,18 @@ public class UIManipulation : MonoBehaviour
     {
         if(Input.GetKeyUp(KeyCode.Escape))
         {
-            if(isPaused)
-            {
-                isPaused = false;
-                RestartSequence();
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-            else
+            if(!isPaused && !DeathScreen.activeSelf)
             {
                 isPaused = true;
                 Cursor.lockState = CursorLockMode.Confined;
                 PauseMenu.SetActive(true);
                 Time.timeScale = 0f;
+            }
+            else if(isPaused && !DeathScreen.activeSelf)
+            {
+                isPaused = false;
+                RestartSequence();
+                Cursor.lockState = CursorLockMode.Locked;
             }
         }
     }

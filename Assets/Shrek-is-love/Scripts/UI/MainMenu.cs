@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour
             loadButton.interactable = false;
         }
     }
+
     public void OnPlayButtonClicked() 
     {
         DataPersistenceManager.instance.NewGame();

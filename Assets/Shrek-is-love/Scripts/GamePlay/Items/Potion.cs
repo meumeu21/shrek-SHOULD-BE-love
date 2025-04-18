@@ -22,6 +22,7 @@ public class Potion : MonoBehaviour, IDataPersistence
     private void OnTriggerEnter(Collider other)
     {
         collected = true;
+        FindObjectOfType<AudioManager>().Play("PotionSound");
     }
 
     public void LoadData(GameData gameData)

@@ -8,6 +8,7 @@ public class Bootstrapper : MonoBehaviour, IBootstrapper
 {
     [SerializeField] private GameObject audioManagerPrefab;
     [SerializeField] private GameObject dataPersistenceManagerPrefab;
+    [SerializeField] private GameObject cursor;
 
     private string sceneName;
 
@@ -17,6 +18,7 @@ public class Bootstrapper : MonoBehaviour, IBootstrapper
         sceneName = SceneManager.GetActiveScene().name;
         InstantiateAudioManager();
         InstantiatedataPersistenceManager();
+        InstantiateCursor();
         ConfigureDependencies();
     }
 
@@ -28,6 +30,11 @@ public class Bootstrapper : MonoBehaviour, IBootstrapper
     public void InstantiatedataPersistenceManager()
     {
         Instantiate(dataPersistenceManagerPrefab);
+    }
+
+    public void InstantiateCursor()
+    {
+        Instantiate(cursor);
     }
 
     public void ConfigureDependencies()

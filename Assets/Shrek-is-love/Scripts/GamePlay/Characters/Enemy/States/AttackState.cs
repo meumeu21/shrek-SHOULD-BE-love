@@ -67,6 +67,7 @@ public class AttackState
         {
             CallAfterDelay.Create(0.55f, () =>
             {
+                GameObject.FindObjectOfType<AudioManager>().Play("Punch");
                 damageDealer?.Attack();
                 isAttacking = false;
             });
