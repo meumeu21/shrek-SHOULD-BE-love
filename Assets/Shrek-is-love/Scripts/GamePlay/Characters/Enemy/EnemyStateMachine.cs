@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public enum EnemyState { Patrol, Chase, Attack }
 
-public class EnemyStateMachine : MonoBehaviour
+public class EnemyStateMachine : MonoBehaviour // Машина не должна знать о состояниях
 {
     public EnemyState currentState { get; private set; }
     public GameObject currentEnemy { get; private set; }

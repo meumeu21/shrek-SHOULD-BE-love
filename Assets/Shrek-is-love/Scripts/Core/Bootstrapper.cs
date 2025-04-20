@@ -39,7 +39,7 @@ public class Bootstrapper : MonoBehaviour, IBootstrapper
 
     public void ConfigureDependencies()
     {
-        if(sceneName == "MainMenu") { FindObjectOfType<AudioManager>().Play("MenuTheme"); }
+        if (sceneName == "MainMenu") { FindObjectOfType<AudioManager>().Play("MenuTheme"); }
         else { FindObjectOfType<AudioManager>().Play("MainTheme"); }
     }
 }
