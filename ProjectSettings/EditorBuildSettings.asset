@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Shrek-is-love/Scenes/MainMenu.unity
+    guid: d0b25da9cdaaa453e8da439e07a8dcc7
+  - enabled: 1
+    path: Assets/Shrek-is-love/Scenes/Level1.unity
+    guid: 42e62dc37c95eca43add757ae6d7a480
   m_configObjects: {}
